@@ -36,6 +36,7 @@ const nav = [
 
 const TopNav = () => {
     const {globalData, setOpenCart} = useGlobalContext()
+    console.log(setOpenCart)
     const paddingX = '150px'
 
     const navButtons = [
@@ -51,7 +52,7 @@ const TopNav = () => {
         },
         {
             Icon: BsCart4,
-            action: setOpenCart(true),
+            action: () => setOpenCart(true),
             id: 'cart'
         }
     ]
@@ -136,7 +137,7 @@ const TopNav = () => {
                     navButtons.map( ({Icon, action, id}) => (
                         <NavButton 
                         key={uuid()}
-                        onClick={action}
+                        onClick={() => action && action()}
                         >
                         <Icon size={18} />
                         {id==='cart' && <sup><Typography sx={{pl: '3px', mb: '10px'}}>{globalData?.cartNumber}</Typography></sup>}

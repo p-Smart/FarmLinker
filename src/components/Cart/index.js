@@ -13,7 +13,7 @@ const Cart = () => {
         sx={{
             position: 'fixed',
             right: openCart ? 0 : '-100%',
-            transition: '1s ease',
+            transition: '.7s ease',
             width: '30%',
             height: '100vh',
             p: '15px 10px',
