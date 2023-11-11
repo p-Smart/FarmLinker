@@ -51,6 +51,10 @@ const Hero = () => {
             </Typography>
             <Stack
             direction='row'
+            sx={{
+                gap: '20px',
+                height: '50px'
+            }}
             >
             <Typography>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.

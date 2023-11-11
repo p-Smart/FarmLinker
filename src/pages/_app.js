@@ -5,6 +5,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import { createTheme } from 'src/theme';
 import GlobalContext from 'src/contexts/globalContext';
 import { useState } from 'react';
+import { register } from 'swiper/element/bundle';
+register()
 
 
 const App = ({ Component, pageProps }) => {
