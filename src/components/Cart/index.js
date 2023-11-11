@@ -1,4 +1,4 @@
-import { Button, Stack, SwipeableDrawer, Typography } from "@mui/material"
+import { Button, Divider, Stack, SwipeableDrawer, Typography } from "@mui/material"
 import {GrClose} from 'react-icons/gr'
 import { useGlobalContext } from "src/contexts/globalContext"
 
@@ -21,6 +21,7 @@ const Cart = () => {
             bgcolor: 'neutral.50',
             boxShadow: '0 0 10px rgb(0,0,0,.125)',
             zIndex: 2,
+            gap: '15px'
         }}
         >
         <Stack
@@ -42,6 +43,19 @@ const Cart = () => {
         style={{cursor: 'pointer'}} 
         onClick={() => setOpenCart(false)}
         />
+        </Stack>
+        <Divider 
+        sx={{
+            borderColor: 'neutral.200'
+        }}
+        />
+
+        <Stack>
+            <Typography
+            variant="h6"
+            >
+                Your Cart is currently empty.
+            </Typography>
         </Stack>
         </Stack>
 

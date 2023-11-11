@@ -13,7 +13,7 @@ const App = ({ Component, pageProps }) => {
 
   const [openCart, setOpenCart] = useState(false)
   const [globalData, setGlobalData] = useState({
-    cartNumber: 2
+    cartNumber: 0
   })
 
   return (

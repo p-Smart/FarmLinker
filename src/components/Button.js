@@ -28,27 +28,29 @@ return (
     sx={{
         display: 'flex',
         textTransform: 'unset',
-        borderRadius: variant!=='outlined' ? '5px' : 'unset',
-        ...variant!=='normal' && {
-            color: "neutral.800",
-            background: variant==='outlined' ? 'transparent' : primary.main,
-            '&:hover': {
-                background: variant==='outlined' ? 'transparent' : primary.main,
-                color: variant==='outlined' ? primary.main : 'neutral.800',
-            },
-            gap: '10px',
-            ...variant!=='outlined' && {
-                p: '10px 40px',
-            },
-            alignItems: 'center',
-            cursor: !loading ? 'pointer' : 'not-allowed',
-            ...loading && variant !== 'outlined' && {bgcolor: 'neutral.500'},
-            alignSelf: 'flex-end',
-            '&.Mui-disabled': {
-            bgcolor: variant==='outlined' ? 'transparent' : 'neutral.500',
-            color: 'neutral.400',
-            ...border && {border: '1px solid', borderColor: 'primary.main'},
+        borderRadius: 'unset',
+        color: variant==='text' || variant==='outlined' ? "neutral.800" : 'neutral.50',
+        border: '1px solid',
+        borderColor: 'transparent',
+        bgcolor: variant==='outlined' || variant==='text' ? 'transparent' : primary.main,
+        '&:hover': {
+            bgcolor: variant==='outlined' ? 'neutral.800' : variant==='text' ? 'transparent' : 'neutral.50',
+            color: variant==='outlined' ? 'neutral.50' : variant==='text' ? 'primary.main' : 'neutral.800',
+            borderColor: !variant ? 'neutral.800' : 'unset',
         },
+        ...variant==='outlined' && {
+            boxShadow: '0 0 10px rgb(0,0,0,.125)'
+        },
+        gap: '10px',
+        p: '10px 40px',
+        alignItems: 'center',
+        cursor: !loading ? 'pointer' : 'not-allowed',
+        ...loading && variant !== 'outlined' && {bgcolor: 'neutral.500'},
+        alignSelf: 'flex-end',
+        '&.Mui-disabled': {
+        bgcolor: variant==='outlined' ? 'transparent' : 'neutral.500',
+        color: 'neutral.400',
+        ...border && {border: '1px solid', borderColor: 'primary.main'},
         },
         ...sx,
     }}

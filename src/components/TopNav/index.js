@@ -92,7 +92,7 @@ const TopNav = () => {
 
             <Divider 
             sx={{
-                borderColor: 'neutral.400'
+                borderColor: 'neutral.200'
             }}
             />
 
@@ -120,7 +120,7 @@ const TopNav = () => {
                     nav.map( ({title, route}) => (
                         <Button
                         key={uuid()}
-                        variant='outlined'
+                        variant='text'
                         title={title}
                         />
                     ) )
