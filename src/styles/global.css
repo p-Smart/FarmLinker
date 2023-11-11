@@ -1,0 +1,75 @@
+html{ -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+*{margin: 0; padding: 0;}
+
+@font-face {
+  font-family: 'ClashDisplay-Regular';
+  src: url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Regular.woff2') format('woff2'),
+       url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Regular.woff') format('woff'),
+       url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Regular.ttf') format('truetype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'ClashDisplay-Bold';
+  src: url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Bold.woff2') format('woff2'),
+       url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Bold.woff') format('woff'),
+       url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Bold.ttf') format('truetype');
+       font-weight: 700;
+       font-display: swap;
+       font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Semibold';
+  src: url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Semibold.woff2') format('woff2'),
+       url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Semibold.woff') format('woff'),
+       url('/assets/fonts/ClashDisplay/Fonts/WEB/fonts/ClashDisplay-Semibold.ttf') format('truetype');
+       font-weight: 600;
+       font-display: swap;
+       font-style: normal;
+}
+
+@font-face {
+  font-family: 'MadeTommy-Regular';
+  src: url('/assets/fonts/MadeTommyOutline/MADE TOMMY Regular Outline_PERSONAL USE.otf') format('opentype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: normal;
+}
+
+@font-face {
+  font-family: 'MadeTommy-Bold';
+  src: url('/assets/fonts/MadeTommyOutline/MADE TOMMY Bold Outline_PERSONAL USE.otf') format('opentype');
+       font-weight: 600;
+       font-display: swap;
+       font-style: normal;
+}
+
+@font-face {
+  font-family: 'TypoHoop-Regular';
+  src: url('/assets/fonts/typo-hoop-demo/Typo Hoop_Regular_Demo.otf') format('opentype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: normal;
+}
+
+@font-face {
+  font-family: 'Volkhov-Regular';
+  src: url('/assets/fonts/volkhov/Volkhov-Regular.ttf') format('truetype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+.MuiPopover-root .MuiPaper-root{ background-color: #000;}
+.MuiPaper-root .MuiButtonBase-root.Mui-selected{ background-color: #D434FE; }
