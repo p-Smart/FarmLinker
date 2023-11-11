@@ -2,7 +2,7 @@ import { neutral } from "./create-palette";
 
 export const createTypography = () => {
   return {
-    fontFamily: `"Open Sans", sans-serif`,
+    fontFamily: `'Asap', sans-serif`,
     color: neutral[800],
     body1: {
       fontSize: '1rem',

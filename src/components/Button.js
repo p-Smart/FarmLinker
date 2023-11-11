@@ -4,26 +4,25 @@ import { primary } from "src/theme/create-palette"
 
 
 
-const Button = forwardRef( ({
-    title,
+const Button = ({
+    title='',
     children,
     Icon,
     IconColor,
     IconSize,
     IconPlacement='right',
-    loading,
-    loadingText, 
-    sx, 
-    variant='contained', 
+    loading=false,
+    loadingText='', 
+    sx,
+    variant='contained',
     roundedCorners=true,
-    squareCorners,
-    border,
+    squareCorners=false,
+    border=false,
     ...props
-}, ref) => {
+}) => {
 
 return (
     <MUIButton
-    ref={ref}
     direction='row'
     disabled={loading}
     sx={{
@@ -31,10 +30,11 @@ return (
         textTransform: 'unset',
         borderRadius: variant!=='outlined' ? '5px' : 'unset',
         ...variant!=='normal' && {
-            color: "neutral.50",
-            background: variant==='outlined' ? 'transparent' : primary.mainGradient,
+            color: "neutral.800",
+            background: variant==='outlined' ? 'transparent' : primary.main,
             '&:hover': {
-                background: variant==='outlined' ? 'transparent' : primary.mainGradient,
+                background: variant==='outlined' ? 'transparent' : primary.main,
+                color: variant==='outlined' ? primary.main : 'neutral.800',
             },
             gap: '10px',
             ...variant!=='outlined' && {
@@ -59,7 +59,7 @@ return (
             !loading ?
             (
                 title ?
-            <Typography sx={{fontWeight: 600, fontSize: '.85rem'}}>
+            <Typography sx={{fontWeight: 600}}>
             {title}
             </Typography> :
                 children
@@ -84,6 +84,6 @@ return (
     </MUIButton>
 )
 
-} )
+}
 
 export default Button
