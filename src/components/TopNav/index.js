@@ -36,7 +36,6 @@ const nav = [
 
 const TopNav = () => {
     const {globalData, setOpenCart} = useGlobalContext()
-    console.log(setOpenCart)
     const paddingX = '150px'
 
     const navButtons = [
