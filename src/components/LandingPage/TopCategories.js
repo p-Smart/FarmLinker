@@ -72,7 +72,8 @@ const TopCategories = () => {
             gap: '50px'
         }}
         >
-        <Typography sx={{textAlign: 'center'}} variant="h2">Top Categories</Typography>
+        <Typography sx={{textAlign: 'center'}} 
+        variant="h2">Top Categories</Typography>
         {/* <Stack
         direction='row'
         sx={{
@@ -112,8 +113,8 @@ const TopCategories = () => {
         slides-per-view="4"
         space-between="30px"
         navigation="true"
-        pagination="true"
         css-mode="true"
+        loop="true"
         style={{
             
         }}

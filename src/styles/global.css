@@ -10,3 +10,7 @@ input::-webkit-inner-spin-button {
 
 .MuiPopover-root .MuiPaper-root{ background-color: #000;}
 .MuiPaper-root .MuiButtonBase-root.Mui-selected{ background-color: #D434FE; }
+
+
+swiper-container::part(button-prev) {color: #000; width: 30px; height: 30px;}
+swiper-container::part(button-next) {color: #000; width: 30px; height: 30px;}
