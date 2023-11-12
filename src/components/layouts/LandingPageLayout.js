@@ -3,6 +3,7 @@ import TopNav from "../TopNav"
 import Cart from "../Cart"
 import GlobalContext from "src/contexts/globalContext"
 import { useState } from "react"
+import Footer from "../LandingPage/Footer"
 
 
 
@@ -14,6 +15,8 @@ const LandingPageLayout = ({children}) => {
         {children}
 
         <Cart />
+
+        <Footer />
         </Stack>
     )
 }
