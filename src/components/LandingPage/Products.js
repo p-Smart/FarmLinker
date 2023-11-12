@@ -1,55 +1,66 @@
-import { Stack, Typography } from "@mui/material"
+import { Divider, Button as MUIButton, Stack, Typography } from "@mui/material"
 import Grid from "../CustomGrid"
 import uuid from "src/utils/uuid"
+import Button from "../Button"
+import { useState } from "react"
 
 
 const mockProducts = [
     {
-        title: 'Watermelon',
+        title: 'Banana',
         price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png'
+        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png',
+        category: 'Vegetables'
+    },
+    {
+        title: 'Maize',
+        price: '1450',
+        image: '/assets/images/5_acfd9bef-0515-4547-8715-ae9dba6bc0b0_600x.png',
+        category: 'Vegetables'
     },
     {
         title: 'Watermelon',
         price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png'
+        image: '/assets/images/18_829b2943-5bb4-4e3e-ac28-668e33e09ee3_600x.png',
+        category: 'Vegetables'
+    },
+    {
+        title: 'Banana',
+        price: '1200',
+        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png',
+        category: 'Vegetables'
+    },
+    {
+        title: 'Maize',
+        price: '1450',
+        image: '/assets/images/5_acfd9bef-0515-4547-8715-ae9dba6bc0b0_600x.png',
+        category: 'Vegetables'
     },
     {
         title: 'Watermelon',
         price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png'
+        image: '/assets/images/18_829b2943-5bb4-4e3e-ac28-668e33e09ee3_600x.png',
+        category: 'Vegetables'
     },
     {
-        title: 'Watermelon',
+        title: 'Banana',
         price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png'
+        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png',
+        category: 'Vegetables'
     },
     {
-        title: 'Watermelon',
-        price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png'
-    },
-    {
-        title: 'Watermelon',
-        price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png'
-    },
-    {
-        title: 'Watermelon',
-        price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png'
-    },
-    {
-        title: 'Watermelon',
-        price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png'
-    },
-    
-    
+        title: 'Maize',
+        price: '1450',
+        image: '/assets/images/5_acfd9bef-0515-4547-8715-ae9dba6bc0b0_600x.png',
+        category: 'Vegetables'
+    }
 ]
+
+const mockCategories = ['Vegetables', 'Fruits', 'Food & Drinks', 'Dried Foods']
 
 
 const Products = () => {
+    const [activeCategory, setActiveCategory] = useState('Vegetables')
 
 
     return (
@@ -64,7 +75,23 @@ const Products = () => {
             >
                 Commodities
             </Typography>
-            <Stack></Stack>
+            {/* Categories */}
+            <Grid
+            columns={4}
+            sx={{gap: '50px', width: '100%', justifyContent: 'center'}}
+            gridWrapSx={{}}
+            >
+            {
+            mockCategories.map( (category) => (
+                <Category 
+                key={category}
+                active={category === activeCategory}
+                title={category}
+                onClick={() => setActiveCategory(category)}
+                />
+            ) )
+            }
+            </Grid>
 
             <Grid
             columns={4}
@@ -82,6 +109,13 @@ const Products = () => {
             ) )
             }
             </Grid>
+
+            <Button 
+            title="See More"
+            sx={{
+                alignSelf: 'center'
+            }}
+            />
         </Stack>
     )
 }
@@ -94,9 +128,13 @@ const Product = ({title, price, image}) => {
 
 
     return (
-        <Stack
-        sx={{            
+        <MUIButton
+        sx={{
+            minWidth: 'unset',
+            p: 'unset',
             height: '400px',
+            display: 'block',
+            textTransform: 'unset',
             boxShadow: '0 0 10px rgb(0,0,0,.125)'
         }}
         >
@@ -123,10 +161,11 @@ const Product = ({title, price, image}) => {
             bgcolor: '#fff',
             height: '30%',
             alignItems: 'center',
-            justifyContent: "center"
+            justifyContent: "center",
+            gap: '15px'
         }}
         >
-            <Typography sx={{fontWeight: 600}}>{title}</Typography>
+            <Typography sx={{fontWeight: 600, color: 'neutral.800'}}>{title}</Typography>
             <Typography
             variant="h6"
             sx={{color: 'primary.main'}}
@@ -134,6 +173,40 @@ const Product = ({title, price, image}) => {
             ₦{price}
             </Typography>
         </Stack>
-        </Stack>
+        </MUIButton>
+    )
+}
+
+const Category = ({title, active=false, onClick}) => {
+    
+    return (
+        <MUIButton
+        sx={{
+            minWidth: 'unset',
+            p: 'unset',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '15px',
+            transition: '.7s ease'
+        }}
+        onClick={onClick}
+        >
+            <Typography
+            sx={{
+                textTransform: 'uppercase',
+                color: active ?  'primary.main' : 'neutral.800' 
+            }}
+            variant="h6"
+            >
+                {title}
+            </Typography>
+            <Divider 
+            sx={{
+                borderWidth: '1px',
+                borderColor: active ? 'primary.main' : 'neutral.400',
+                width: '120%',
+            }}
+            />
+        </MUIButton>
     )
 }
