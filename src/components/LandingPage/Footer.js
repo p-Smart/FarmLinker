@@ -4,39 +4,40 @@ import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 import  {FiPhoneCall} from 'react-icons/fi'
 import { SlLocationPin } from "react-icons/sl"
+import { useBreakpoints } from "src/theme/mediaQuery"
 import uuid from "src/utils/uuid"
 
 const contactLinks = [{Icon: SlLocationPin, title: 'Computer Science, University of Ibadan'}, {Icon: FiPhoneCall, title: '+234-801-1234-567'}, {Icon: AiOutlineMail, title: 'info@farmlinker.com'}]
 
 
 const Footer = () => {
-
+    const {xs, sm, md, lg, xl} = useBreakpoints()
 
     return (
         <Stack
         component='footer'
         sx={{
             bgcolor: '#071c21',
-            pt: '100px',
+            pt: sm ? '50px' : '100px',
             '& p': {color: 'neutral.50'},
             color: 'neutral.50'
         }}
         >
         <Stack
         sx={{
-            px: '50px',
+            px: sm ? '20px' : '50px',
             pb: '30px',
             justifyContent: 'space-between'
         }}
         >
         <Stack
-        sx={{gap: '20px', width: '25%'}}
+        sx={{gap: '20px', width: md ? '100%' : lg ? '40%' :  xl ? '30%' : '25%'}}
         >
         <img 
         src="/assets/images/farmlinker-bg-white.png"
         style={{
-            width: 633 / 3.7,
-            height: 394 / 3.7,
+            width: sm ? 633/4 : 633 / 3.7,
+            height: sm ? 394/4 : 394 / 3.7,
             objectFit: 'contain',
         }}
         />
@@ -78,11 +79,12 @@ const Footer = () => {
         />
 
         <Stack
-        direction='row'
+        direction={md ? 'column' : 'row'}
         sx={{
             justifyContent: 'space-between',
             alignItems: 'center',
-            p: '30px 50px'
+            p: '30px 50px',
+            ...md && {gap: '20px'}
         }}
         >
             <Typography>

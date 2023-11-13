@@ -1,9 +1,11 @@
 import { Stack, Typography } from "@mui/material"
 import Button from "../Button"
+import { useBreakpoints } from "src/theme/mediaQuery"
 
 
 
 const TalkToConsultant = () => {
+    const {xs, sm, md, lg, xl} = useBreakpoints()
 
 
     return (
@@ -12,13 +14,15 @@ const TalkToConsultant = () => {
         sx={{
             width: '100%',
             height: '430px',
-            justifyContent: 'space-between',
+            justifyContent: md ? 'center' : 'space-between',
             alignItems: 'center',
             backgroundImage: 'url(/assets/images/6_6a5c3c7a-6510-4c1d-a349-6ef56203d13d.webp)',
             backgroundPosition: 'center center',
             backgroundSize: 'cover'
         }}
         >
+        {
+        !md &&
         <img 
         src="/assets/images/12_9006c4fb-de97-4ab1-90eb-90efae555f0c_570x.png"
         style={{
@@ -27,6 +31,7 @@ const TalkToConsultant = () => {
             objectFit: 'contain'
         }}
         />
+        }
 
         <Stack
         sx={{
@@ -56,7 +61,10 @@ const TalkToConsultant = () => {
             direction='row'
             sx={{
                 gap: '15px',
-                alignSelf: 'flex-end'
+                alignSelf: md ? 'center' : 'flex-end',
+                ...lg && {
+                    '& button': {p: '10px 15px'}
+                }
             }}
             >
             <Button
@@ -77,6 +85,8 @@ const TalkToConsultant = () => {
             </Stack>
         </Stack>
 
+        {
+        !md &&
         <img 
         src="/assets/images/woman-running-small-business.png"
         style={{
@@ -85,6 +95,7 @@ const TalkToConsultant = () => {
             objectFit: 'cover'
         }}
         />
+        }
         </Stack>
     )
 }
