@@ -2,6 +2,13 @@ import { Stack, Typography } from "@mui/material"
 import { useEffect, useRef } from "react"
 import { neutral } from "src/theme/create-palette"
 import uuid from "src/utils/uuid"
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import 'swiper/css/scrollbar'
+import { useBreakpoints } from "src/theme/mediaQuery"
 
 const mockCategories = [
     {
@@ -49,31 +56,22 @@ const mockCategories = [
 
 
 const TopCategories = () => {
-
-    const swiperElRef = useRef(null)
-
-    useEffect(() => {
-        swiperElRef.current.addEventListener('swiperprogress', (e) => {
-          const [swiper, progress] = e.detail
-          console.log(progress)
-        })
-    
-        swiperElRef.current.addEventListener('swiperslidechange', (e) => {
-          console.log('slide changed')
-        });
-    }, [])
+    const {xs, sm, md, lg, xl} = useBreakpoints()
+    const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
 
 
     return (
         <Stack
         sx={{
-            p: '100px 150px',
+            p: `100px ${paddingX}`,
             bgcolor: 'secondary.main',
             gap: '50px'
         }}
         >
         <Typography sx={{textAlign: 'center'}} 
-        variant="h2">Top Categories</Typography>
+        variant={sm ? 'h4' : md ? 'h3' : "h2"}
+        >Top Categories
+        </Typography>
         {/* <Stack
         direction='row'
         sx={{
@@ -106,22 +104,19 @@ const TopCategories = () => {
         ) )
         }
         </Stack> */}
-
-
-        <swiper-container
-        ref={swiperElRef}
-        slides-per-view="4"
-        space-between="30px"
-        navigation="true"
-        css-mode="true"
-        loop="true"
-        style={{
-            
-        }}
+        <Swiper
+        spaceBetween={sm ? 10 : md ? 20 : 30}
+        slidesPerView={sm ? 2 : md ? 3 : 4}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+        style={{width: '100%'}}
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        loop
+        navigation={{ clickable: true }}
         >
         {
         mockCategories.map( ({image, title, count}) => (
-            <swiper-slide
+            <SwiperSlide
             style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -140,10 +135,10 @@ const TopCategories = () => {
             />
             <Typography sx={{fontWeight: 600}}>{title}</Typography>
             <Typography sx={{fontWeight: 600}}>({count}items)</Typography>
-            </swiper-slide>
+            </SwiperSlide>
         ) )
         }
-        </swiper-container>
+        </Swiper>
         </Stack>
     )
 }

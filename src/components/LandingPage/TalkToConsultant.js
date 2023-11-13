@@ -16,7 +16,7 @@ const TalkToConsultant = () => {
             alignItems: 'center',
             backgroundImage: 'url(/assets/images/6_6a5c3c7a-6510-4c1d-a349-6ef56203d13d.webp)',
             backgroundPosition: 'center center',
-            backgroundSize: 'cover',
+            backgroundSize: 'cover'
         }}
         >
         <img 

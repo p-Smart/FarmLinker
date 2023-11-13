@@ -1,11 +1,13 @@
 import { Button, Divider, Stack, SwipeableDrawer, Typography } from "@mui/material"
 import {GrClose} from 'react-icons/gr'
 import { useGlobalContext } from "src/contexts/globalContext"
+import { useBreakpoints } from "src/theme/mediaQuery"
 
 
 
 const Cart = () => {
     const {openCart, setOpenCart} = useGlobalContext()
+    const {xs, sm, md, lg, xl} = useBreakpoints()
 
 
     return (
@@ -15,7 +17,7 @@ const Cart = () => {
             position: 'fixed',
             right: openCart ? 0 : '-100%',
             transition: '.7s ease',
-            width: '25%',
+            width: xs ? '85%' : sm ? '65%' : md ? '50%' : lg ? '35%' : '25%',
             height: '100vh',
             p: '30px',
             bgcolor: 'neutral.50',

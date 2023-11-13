@@ -1,24 +1,28 @@
 import { Box, Divider, Stack, Typography } from "@mui/material"
+import { useBreakpoints } from "src/theme/mediaQuery"
 
 
 
 const AboutUs = () => {
+    const {xs, sm, md, lg, xl} = useBreakpoints()
+    const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
 
 
     return (
         <Stack
-        direction='row'
+        direction={md ? 'column-reverse' : 'row'}
         sx={{
-            p: '100px 150px',
+            p: `100px ${paddingX}`,
             justifyContent: 'space-between',
-            alignItems: 'center'
+            alignItems: 'center',
+            ...md && {gap: '30px'}
         }}
         >
         <Stack
         direction='row'
         sx={{
-            width: '570px',
-            height: '531px',
+            width: sm ? 570/1.5 : md ? 570/1.2 : lg ? 570/1.5 : xl ? 570/1.3 : 570,
+            height: sm ? 531/1.5 : md ? 531/1.2 : lg ? 531/1.5 : xl ? 531/1.3 : 531,
             gap: '30px',
         }}
         >
@@ -52,15 +56,24 @@ const AboutUs = () => {
             position: 'absolute',
             right: 0,
             bottom: 0,
-            p: '15px',
+            p: lg ? '10px' : '15px',
             bgcolor: 'neutral.50',
         }}
         >
             <Stack
-            sx={{alignItems: 'center', justifyContent: 'center', bgcolor: 'primary.main', p: '35px 10px', color: 'neutral.50'}}
+            sx={{
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                bgcolor: 'primary.main', 
+                p: lg ? '20px 10px' : '35px 10px', 
+                color: 'neutral.50'
+            }}
             >
-                <Stack direction='row'><Typography variant="h4">5</Typography><Typography sx={{mt: 'auto'}}>+</Typography></Stack>
-                <Typography variant='h6'>Years Experience</Typography>
+                <Stack direction='row'><Typography variant={lg ? 'h5' :"h4"}>5</Typography><Typography sx={{mt: 'auto'}}>+</Typography></Stack>
+                <Typography 
+                variant='h6' 
+                sx={{...lg && {fontSize: '.8rem'}}}
+                >Years Experience</Typography>
             </Stack>
         </Box>
         </Box>
@@ -68,7 +81,7 @@ const AboutUs = () => {
         
         <Stack
         sx={{
-            width: '48%',
+            width: md ? '100%' : '48%',
             gap: '20px'
         }}
         >
@@ -76,7 +89,7 @@ const AboutUs = () => {
             KNOW MORE ABOUT FARMLINKER
             </Typography>
             <Typography
-            variant="h2"
+            variant={sm ? 'h5' : lg ? "h4" : "h3"}
             >
             {`Trusted Farm Product Marketplace`}
             </Typography>

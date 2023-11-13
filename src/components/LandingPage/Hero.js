@@ -1,34 +1,38 @@
 import { Divider, Stack, Typography } from "@mui/material"
 import Button from "../Button"
+import { useBreakpoints } from "src/theme/mediaQuery"
 
 
 
 const Hero = () => {
-
+    const {xs, sm, md, lg, xl} = useBreakpoints()
+    const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
 
 
     return (
         <Stack
-        direction='row'
+        direction={md ? 'column-reverse' : 'row'}
         sx={{
             width: '100%',
-            height: '430px',
+            height: md ? 'fit-content' : '430px',
             bgcolor: 'secondary.main',
             justifyContent: 'space-between',
             alignItems: 'center',
-            p: '50px 150px'
+            p: `50px ${paddingX}`,
+            ...md && {gap: '20px'}
         }}
         >
         <Stack
         sx={{
-            width: '48%'
+            width: md ? '100%' : '48%',
+            ...md && {alignItems: 'center'}
         }}
         >
         <img
         src='/assets/images/23_1030x.webp'
         style={{
-            width: 922 / 1.5,
-            height: 467 / 1.5,
+            width: sm ? 922 / 2.3 : lg ? 922 / 2 : xl ? 922 / 1.7 : 922 / 1.5,
+            height: sm ? 467 / 2.3 : lg ? 467 / 2 : xl ? 467 / 1.7 : 467 / 1.5,
             objectFit: 'cover'
         }}
         />
@@ -38,16 +42,16 @@ const Hero = () => {
         </Stack>
         <Stack
         sx={{
-            width: '48%',
-            textAlign: 'right',
+            width: md ? '100%' : '48%',
+            textAlign: md ? 'left' : 'right',
             gap: '20px'
         }}
         >
             <Typography sx={{color: 'primary.main', fontWeight: 600}}>100% genuine Products</Typography>
             <Typography
-            variant="h3"
+            variant={sm ? 'h5' : lg ? "h4" : "h3"}
             >
-            {`Our Garden's Most Favourite Food`}
+            {`Agric Booking N Consultancy`}
             </Typography>
             <Stack
             direction='row'
@@ -71,7 +75,11 @@ const Hero = () => {
             direction='row'
             sx={{
                 gap: '15px',
-                alignSelf: 'flex-end'
+                alignSelf: md ? 'flex-start' : 'flex-end',
+                '& button': {
+                    p: '8px 16px',
+                },
+                ...sm && {mt: '20px'}
             }}
             >
             <Button 

@@ -3,6 +3,7 @@ import Grid from "../CustomGrid"
 import uuid from "src/utils/uuid"
 import Button from "../Button"
 import { useState } from "react"
+import { useBreakpoints } from "src/theme/mediaQuery"
 
 
 const mockProducts = [
@@ -60,26 +61,31 @@ const mockCategories = ['Vegetables', 'Fruits', 'Food & Drinks', 'Dried Foods']
 
 
 const Products = () => {
+    const {xs, sm, md, lg, xl} = useBreakpoints()
+    const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
     const [activeCategory, setActiveCategory] = useState('Vegetables')
 
 
     return (
         <Stack
         sx={{
-            p: '100px 150px',
+            p: `100px ${paddingX}`,
             gap: '50px',
         }}
         >
-            <Typography variant="h2"
+            <Typography 
+            variant={sm ? 'h4' : md ? 'h3' : "h2"}
             sx={{textAlign: 'center'}}
             >
                 Commodities
             </Typography>
             {/* Categories */}
             <Grid
-            columns={4}
+            columns={sm ? 2 : md ? 3 : 4}
             sx={{gap: '50px', width: '100%', justifyContent: 'center'}}
-            gridWrapSx={{}}
+            gridWrapSx={{
+                gap: '50px'
+            }}
             >
             {
             mockCategories.map( (category) => (
@@ -94,13 +100,18 @@ const Products = () => {
             </Grid>
 
             <Grid
-            columns={4}
-            sx={{gap: '30px'}}
-            gridWrapSx={{justifyContent: 'space-between'}}
+            columns={sm ? 2 : md ? 3 : 4}
+            sx={{
+                gap: '30px'
+            }}
+            gridWrapSx={{
+                justifyContent: 'space-between',
+                gap: '20px'
+            }}
             >
             {
             mockProducts.map( ({title, price, image}) => (
-                <Product 
+                <Product
                 key={uuid()}
                 title={title}
                 price={price}
@@ -178,6 +189,7 @@ const Product = ({title, price, image}) => {
 }
 
 const Category = ({title, active=false, onClick}) => {
+    const {xs, sm, md, lg, xl} = useBreakpoints()
     
     return (
         <MUIButton
@@ -194,7 +206,8 @@ const Category = ({title, active=false, onClick}) => {
             <Typography
             sx={{
                 textTransform: 'uppercase',
-                color: active ?  'primary.main' : 'neutral.800' 
+                color: active ?  'primary.main' : 'neutral.800',
+                ...sm && {fontSize: '.85rem'}
             }}
             variant="h6"
             >

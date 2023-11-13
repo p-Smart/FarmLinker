@@ -14,3 +14,6 @@ input::-webkit-inner-spin-button {
 
 swiper-container::part(button-prev) {color: #000; width: 30px; height: 30px;}
 swiper-container::part(button-next) {color: #000; width: 30px; height: 30px;}
+
+.swiper-button-prev{transform: scale(.8); color: #000 !important;}
+.swiper-button-next{transform: scale(.8); color: #000 !important;}

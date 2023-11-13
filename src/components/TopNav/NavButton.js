@@ -21,7 +21,8 @@ const NavButton = ({children, ...props}) => {
             '&:hover': {
                 bgcolor: 'primary.main',
                 color: 'neutral.50',
-            }
+            },
+            position: 'relative'
         }}
         {...props}
         >

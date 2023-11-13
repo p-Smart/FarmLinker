@@ -10,33 +10,25 @@ import {FiSearch} from 'react-icons/fi'
 import {BsCart4} from 'react-icons/bs'
 import NavButton from "./NavButton"
 import { useGlobalContext } from "src/contexts/globalContext"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import { useBreakpoints } from "src/theme/mediaQuery"
 
 const toplinks = [{Icon: AiOutlineMail, title: 'info@farmlinker.com'}, {Icon: SlLocationPin, title: 'University of Ibadan'}]
 
-const nav = [
-    {
-        title: 'Home',
-        route: '/'
-    },
-    {
-        title: 'About Us',
-        route: '/'
-    },
-    {
-        title: 'Products',
-        route: '/'
-    },
-    {
-        title: 'Contact',
-        route: '/'
-    },
-]
+const nav = [{title: 'Home', route: '/'}, {title: 'About Us',route: '/'}, {title: 'Products', route: '/'}, {title: 'Contact', route: '/'},]
+
+const accountOptions = [{title: 'My Account', route: '/account'}, {title: 'Login', route: '/login'}, {title: 'Register', route: '/register'}]
 
 
 
 const TopNav = () => {
     const {globalData, setOpenCart} = useGlobalContext()
-    const paddingX = '150px'
+    const router = useRouter()
+    const {xs, sm, md, lg, xl} = useBreakpoints()
+    const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
+
+    const [openAccountPopOver, setOpenAccountPopOver] = useState(false)
 
     const navButtons = [
         {
@@ -46,7 +38,7 @@ const TopNav = () => {
         },
         {
             Icon: FaRegUser,
-            action: '',
+            action: () => setOpenAccountPopOver(!openAccountPopOver),
             id: 'user'
         },
         {
@@ -62,8 +54,9 @@ const TopNav = () => {
             bgcolor: 'secondary.main'
         }}
         >
-            <Stack direction='row'
-            sx={{justifyContent: 'space-between', px: paddingX, py: '10px'}}
+            <Stack 
+            direction={sm ? 'column' : 'row'}
+            sx={{justifyContent: 'space-between', px: paddingX, py: '10px', ...sm && {alignItems: 'center', gap: '10px'}}}
             >
                 <Stack direction='row'
                 sx={{gap: '20px'}}
@@ -97,7 +90,7 @@ const TopNav = () => {
             />
 
             <Stack
-            direction='row'
+            direction={md ? 'column' : 'row'}
             sx={{px: paddingX, py: '20px', alignItems: 'center', justifyContent: 'space-between'}}
             >
             <img 
@@ -109,7 +102,8 @@ const TopNav = () => {
             }}
             />
 
-            <Stack direction='row'
+            <Stack 
+            direction={md ? 'column' : 'row'}
             sx={{
                 gap: '50px'
             }}
@@ -122,24 +116,58 @@ const TopNav = () => {
                         key={uuid()}
                         variant='text'
                         title={title}
+                        sx={{p: '5px 10px'}}
                         />
                     ) )
                 }
             </Stack>
 
-            <Stack direction='row'
+            <Stack 
+            direction='row'
             sx={{
-                gap: '20px'
+                gap: '20px',
+                ...md && {justifyContent: 'center'}
             }}
             >
                 {
                     navButtons.map( ({Icon, action, id}) => (
                         <NavButton 
                         key={uuid()}
-                        onClick={() => action && action()}
+                        onClick={(e) => {e.stopPropagation(); action && action()}}
+                        // onMouseOver={() => action && action()}
                         >
                         <Icon size={18} />
                         {id==='cart' && <sup><Typography sx={{pl: '3px', mb: '10px'}}>{globalData?.cartNumber}</Typography></sup>}
+
+                        {id==='user' && openAccountPopOver &&
+                        <Stack
+                        sx={{
+                            position: 'absolute',
+                            width: 'max-content',
+                            top: 'calc(100% + 10px)',
+                            boxShadow: '0 0 10px rgb(0,0,0.125)',
+                            bgcolor: 'neutral.50',
+                            gap: '20px',
+                            p: '30px 30px',
+                            textTransform: 'capitalize',
+                            alignItems: 'flex-start',
+                            justifyContent: 'flex-start'
+                        }}
+                        >
+                        {
+                        accountOptions.map( ({title, route}) => (
+                            <Button
+                            key={uuid()}
+                            title={title}
+                            variant="text"
+                            onClick={() => router.push(route)}
+                            component='span'
+                            sx={{p: 0, alignSelf: 'flex-start'}}
+                            />
+                        ) )
+                        }
+                        </Stack>
+                        }
                         </NavButton>
                     ) )
                 }

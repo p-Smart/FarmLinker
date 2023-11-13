@@ -10,7 +10,11 @@ import Footer from "../LandingPage/Footer"
 const LandingPageLayout = ({children}) => {
 
     return (
-        <Stack>
+        <Stack
+        sx={{
+            overflow: 'hidden'
+        }}
+        >
         <TopNav />
         {children}
 
