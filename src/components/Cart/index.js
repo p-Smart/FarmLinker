@@ -22,7 +22,7 @@ const Cart = () => {
             p: '30px',
             bgcolor: 'neutral.50',
             boxShadow: '0 0 10px rgb(0,0,0,.125)',
-            zIndex: 2,
+            zIndex: 11,
             gap: '15px'
         }}
         >
@@ -73,7 +73,7 @@ const Cart = () => {
             height: '100%',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             transition: '.7s ease',
-            zIndex: 1,
+            zIndex: 10,
         }}
         onClick={() => setOpenCart(false)}
         />
