@@ -1,19 +1,21 @@
+import { Stack } from "@mui/material"
 import PageHeading from "src/components/PageHeading"
-import RegisterForm from "src/components/RegisterPage/RegisterForm"
 import LandingPageLayout from "src/components/layouts/LandingPageLayout"
 
 
 
-const RegisterPage = () => {
+const AccountPage = () => {
+
+
 
     return (
         <LandingPageLayout>
         <PageHeading 
-        title='Create Account'
+        title='Account' 
+        topTitle='Your Dashboard'
         />
-        <RegisterForm />
         </LandingPageLayout>
     )
 }
 
-export default RegisterPage
+export default AccountPage

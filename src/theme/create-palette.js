@@ -31,16 +31,6 @@ export const neutral = {
 
 export const divider = '#D5E6FB'
 
-export const grey = {
-  lightest: '#F6F6F6',
-  light: '#D2D2D2',
-  main: '#7F7F7F',
-  dark: '#464646',
-  darkest: '#212121',
-}
-
-export const background = "#150E28"
-
 
 export const createPalette = () => {
 
@@ -48,9 +38,6 @@ export const createPalette = () => {
       primary,
       secondary,
       neutral,
-      divider,
-      grey,
-      background,
-      white: '#fff',
+      divider
   }
 }

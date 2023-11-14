@@ -24,6 +24,13 @@ const RegisterForm = () => {
         query?.accountType && setActiveTab(query?.accountType)
     }, [query] )
 
+    // useEffect( () => {
+    //     router.replace({
+    //         pathname: router.pathname,
+    //         query: { ...query, accountType: activeTab },
+    //     }, undefined, { shallow: true })
+    // }, [activeTab] )
+
 
     const accountType = [
         {

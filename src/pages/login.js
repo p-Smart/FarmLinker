@@ -1,5 +1,5 @@
-import Heading from "src/components/LoginPage/Heading"
 import LoginForm from "src/components/LoginPage/LoginForm"
+import PageHeading from "src/components/PageHeading"
 import LandingPageLayout from "src/components/layouts/LandingPageLayout"
 
 
@@ -8,7 +8,7 @@ const LoginPage = () => {
 
     return (
         <LandingPageLayout>
-        <Heading />
+        <PageHeading title='Login' />
         <LoginForm />
         </LandingPageLayout>
     )
