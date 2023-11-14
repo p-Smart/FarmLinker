@@ -16,7 +16,7 @@ import { useBreakpoints } from "src/theme/mediaQuery"
 
 const toplinks = [{Icon: AiOutlineMail, title: 'info@farmlinker.com'}, {Icon: SlLocationPin, title: 'University of Ibadan'}]
 
-const nav = [{title: 'Home', route: '/'}, {title: 'About Us',route: '#about-us'}, {title: 'Products', route: '/products'}, {title: 'Contact', route: '#consult'},]
+const nav = [{title: 'Home', route: '/'}, {title: 'About Us',route: '#about-us'}, {title: 'Products', route: '/products'}, {title: 'Login', route: '/login'},]
 
 const accountOptions = [{title: 'My Account', route: '/account'}, {title: 'Login', route: '/login'}, {title: 'Register', route: '/register'}]
 
@@ -117,7 +117,7 @@ const TopNav = () => {
                         key={uuid()}
                         variant='text'
                         title={title}
-                        sx={{p: '5px 10px'}}
+                        sx={{p: '5px 10px', ...route===router.pathname && {color: 'primary.main'}}}
                         onClick={() => router.push(route)}
                         />
                     ) )

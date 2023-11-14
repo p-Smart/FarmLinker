@@ -1,11 +1,13 @@
 import { Stack, Typography } from "@mui/material"
 import Button from "../Button"
 import { useBreakpoints } from "src/theme/mediaQuery"
+import { useRouter } from "next/router"
 
 
 
 const TalkToConsultant = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
+    const router = useRouter()
 
 
     return (
@@ -70,6 +72,7 @@ const TalkToConsultant = () => {
             <Button
             title="Create Farmer account"
             sx={{textTransform: 'uppercase'}}
+            onClick={() => router.push('/register?accountType=farmer')}
             />
             <Button 
             title="Learn More"
@@ -78,6 +81,7 @@ const TalkToConsultant = () => {
                 color: 'neutral.50',
                 borderColor: 'neutral.50'
             }}
+            onClick={() => router.push('/register?accountType=farmer')}
             />
             </Stack>
             <Stack>

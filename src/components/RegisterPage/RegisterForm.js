@@ -6,6 +6,7 @@ import FarmerForm from "./FarmerForm"
 import ConsultantForm from "./ConsultantForm"
 import { useRouter } from "next/router"
 import RegisterFormContext from "src/contexts/registerFormContext"
+import Button from "../Button"
 
 
 
@@ -98,6 +99,16 @@ const RegisterForm = () => {
         activeTab==='consultant' &&
         <ConsultantForm />
         }
+
+        <Stack direction='row'>
+            <Typography>Have an account?</Typography>
+            <Button
+            title="Login"
+            variant="text"
+            sx={{p: 0}}
+            onClick={() => router.push('/login')}
+            />
+        </Stack>
         </Stack>
         </RegisterFormContext.Provider>
     )
