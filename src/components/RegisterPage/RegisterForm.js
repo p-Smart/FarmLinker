@@ -1,9 +1,11 @@
 import { Divider, Grid, Stack, Typography, Button as MUIButton } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import BuyerForm from "./BuyerForm"
 import FarmerForm from "./FarmerForm"
 import ConsultantForm from "./ConsultantForm"
+import { useRouter } from "next/router"
+import RegisterFormContext from "src/contexts/registerFormContext"
 
 
 
@@ -11,8 +13,15 @@ const RegisterForm = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
 
+    const router = useRouter()
+    const query = router.query
 
     const [activeTab, setActiveTab] = useState('buyer')
+
+
+    useEffect( () => {
+        query?.accountType && setActiveTab(query?.accountType)
+    }, [query] )
 
 
     const accountType = [
@@ -32,6 +41,11 @@ const RegisterForm = () => {
     ]
 
     return (
+        <RegisterFormContext.Provider
+        value={{
+            activeTab
+        }}
+        >
         <Stack
         sx={{
             alignItems: 'center',
@@ -85,6 +99,7 @@ const RegisterForm = () => {
         <ConsultantForm />
         }
         </Stack>
+        </RegisterFormContext.Provider>
     )
 }
 

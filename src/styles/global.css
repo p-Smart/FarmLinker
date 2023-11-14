@@ -8,8 +8,8 @@ input::-webkit-inner-spin-button {
 *{margin: 0; padding: 0; box-sizing: border-box;}
 
 
-.MuiPopover-root .MuiPaper-root{ background-color: #000;}
-.MuiPaper-root .MuiButtonBase-root.Mui-selected{ background-color: #D434FE; }
+.MuiPopover-root .MuiPaper-root{ background-color: #fff;}
+/* .MuiPaper-root .MuiButtonBase-root.Mui-selected{ background-color: #D434FE; } */
 
 
 swiper-container::part(button-prev) {color: #000; width: 30px; height: 30px;}
