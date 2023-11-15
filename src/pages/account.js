@@ -1,9 +1,9 @@
 import { Stack, Typography } from "@mui/material"
 import Stats from "src/components/AccountPage/Stats"
+import Tools from "src/components/AccountPage/Tools"
 import PageHeading from "src/components/PageHeading"
 import LandingPageLayout from "src/components/layouts/LandingPageLayout"
 import { useBreakpoints } from "src/theme/mediaQuery"
-import uuid from "src/utils/uuid"
 
 
 
@@ -35,15 +35,7 @@ const AccountPage = () => {
         
         <Stats />
 
-        <Stack sx={{gap: '20px'}}>
-        <Typography
-        variant={sm ? 'h5' : lg ? "h4" : "h3"}
-        >
-            Tools
-        </Typography>
-
-        
-        </Stack>
+        <Tools />
         </Stack>
         </LandingPageLayout>
     )
