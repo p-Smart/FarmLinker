@@ -3,18 +3,21 @@ import Button from "../Button"
 import uuid from "src/utils/uuid"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import Grid from "../CustomGrid"
+import { useAccountContext } from "src/contexts/accountContext"
 
 
 
 const Tools = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
 
+    const {openAddProduct, setOpenAddProduct} = useAccountContext()
+
 
     const tools = [
         {
             title: 'Add New Product',
             Icon: 'https://img.icons8.com/color/48/add-product.png',
-            action: null
+            action: () => setOpenAddProduct(true)
         },
         {
             title: 'View All Your Products',

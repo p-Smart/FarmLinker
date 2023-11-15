@@ -5,6 +5,30 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border: none;
+  background-color: white;
+  border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #80b500;
+  height: 5px;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 575px) {
+  ::-webkit-scrollbar {
+    height: 5px;
+  } 
+}
+
+
 *{margin: 0; padding: 0; box-sizing: border-box;}
 
 

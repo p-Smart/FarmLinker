@@ -69,7 +69,10 @@ return (
             <Stack direction='row' 
             sx={{gap: '5px'}}
             >
-            <CircularProgress sx={{color: variant==='outlined' ? "neutral.900" : "neutral.50"}} size={25} />
+            <CircularProgress 
+            sx={{color: variant==='outlined' ? "neutral.900" : "neutral.50"}} 
+            size={25}
+            />
             {
                 loadingText &&
                 <Typography>
