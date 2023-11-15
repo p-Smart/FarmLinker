@@ -1,4 +1,4 @@
-import Heading from "src/components/RegisterPage/Heading"
+import PageHeading from "src/components/PageHeading"
 import RegisterForm from "src/components/RegisterPage/RegisterForm"
 import LandingPageLayout from "src/components/layouts/LandingPageLayout"
 
@@ -8,7 +8,9 @@ const RegisterPage = () => {
 
     return (
         <LandingPageLayout>
-        <Heading />
+        <PageHeading 
+        title='Create Account'
+        />
         <RegisterForm />
         </LandingPageLayout>
     )

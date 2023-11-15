@@ -1,4 +1,4 @@
-import { MenuItem, Select, Slide, Stack, TextField } from "@mui/material"
+import { Box, MenuItem, Select, Slide, Stack, TextField, Typography } from "@mui/material"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import Button from "../Button"
 import { useState } from "react"
@@ -23,14 +23,17 @@ const ConsultantForm = () => {
     const form = [
         {
             label: 'Fullname',
+            type: 'text',
             onChange: (val) => setRegData( (prevVal) => ({...prevVal, fullname: val}) )
         },
         {
             label: 'Email address',
+            type: 'email',
             onChange: (val) => setRegData( (prevVal) => ({...prevVal, email: val}) )
         },
         {
             label: 'Phone number',
+            type: 'tel',
             onChange: (val) => setRegData( (prevVal) => ({...prevVal, tel: val}) )
         },
         {
@@ -40,10 +43,15 @@ const ConsultantForm = () => {
         },
         {
             label: 'Password',
+            type: 'password',
             onChange: (val) => setRegData( (prevVal) => ({...prevVal, pass: val}) )
         },
         
     ]
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
 
     return (
         <Slide
@@ -53,6 +61,8 @@ const ConsultantForm = () => {
         in={activeTab}
         >
         <Stack
+        component='form'
+        onSubmit={handleSubmit}
         sx={{
             width: sm ? '100%' : md ? '80%' : '50%',
             alignItems: 'center',
@@ -63,21 +73,24 @@ const ConsultantForm = () => {
         }}
         >
             {
-            form.map ( ({label, onChange, select}) => (
+            form.map ( ({label, onChange, type, select}) => (
                 <>
                 {
                 !select ?
                 <TextField
                 key={label}
                 label={label}
+                type={type}
                 onChange={(e) => onChange && onChange(e.target.value)}
-                type={label==='Password' ? "password" : 'text'}
+                required
                 /> :
+                <Box sx={{width: '100%'}}>
+                <Typography sx={{fontWeight: 300, color: 'neutral.600'}}>{label}</Typography>
                 <Select
-                defaultValue='default'
                 label={label}
+                required
                 onChange={(e) => onChange && onChange(e.target.value)}
-                sx={{width: '100%'}}
+                sx={{width: '100%', mt: '5px'}}
                 >
                 {
                     select.map( ({label, id}) => (
@@ -89,7 +102,8 @@ const ConsultantForm = () => {
                         </MenuItem>
                     ) )
                 }
-            </Select>
+                </Select>
+                </Box>
                 }
                 </>
             ) )
@@ -97,8 +111,8 @@ const ConsultantForm = () => {
 
             <Button 
             title="Create Consultant Account"
+            type='submit'
             sx={{alignSelf: 'flex-start'}}
-            onClick={() => console.log(regData)}
             />
         </Stack>
         </Slide>

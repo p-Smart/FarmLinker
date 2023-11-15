@@ -4,65 +4,16 @@ import uuid from "src/utils/uuid"
 import Button from "../Button"
 import { useState } from "react"
 import { useBreakpoints } from "src/theme/mediaQuery"
+import { productCategories, products } from "src/mock-data/products"
+import { useRouter } from "next/router"
 
-
-const mockProducts = [
-    {
-        title: 'Banana',
-        price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png',
-        category: 'Vegetables'
-    },
-    {
-        title: 'Maize',
-        price: '1450',
-        image: '/assets/images/5_acfd9bef-0515-4547-8715-ae9dba6bc0b0_600x.png',
-        category: 'Vegetables'
-    },
-    {
-        title: 'Watermelon',
-        price: '1200',
-        image: '/assets/images/18_829b2943-5bb4-4e3e-ac28-668e33e09ee3_600x.png',
-        category: 'Vegetables'
-    },
-    {
-        title: 'Banana',
-        price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png',
-        category: 'Vegetables'
-    },
-    {
-        title: 'Maize',
-        price: '1450',
-        image: '/assets/images/5_acfd9bef-0515-4547-8715-ae9dba6bc0b0_600x.png',
-        category: 'Vegetables'
-    },
-    {
-        title: 'Watermelon',
-        price: '1200',
-        image: '/assets/images/18_829b2943-5bb4-4e3e-ac28-668e33e09ee3_600x.png',
-        category: 'Vegetables'
-    },
-    {
-        title: 'Banana',
-        price: '1200',
-        image: '/assets/images/2_dfb555bf-4369-4213-9642-1cdc34ae98ea_600x.png',
-        category: 'Vegetables'
-    },
-    {
-        title: 'Maize',
-        price: '1450',
-        image: '/assets/images/5_acfd9bef-0515-4547-8715-ae9dba6bc0b0_600x.png',
-        category: 'Vegetables'
-    }
-]
-
-const mockCategories = ['Vegetables', 'Fruits', 'Food & Drinks', 'Dried Foods']
 
 
 const Products = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
+    const router = useRouter()
+
     const [activeCategory, setActiveCategory] = useState('Vegetables')
 
 
@@ -88,7 +39,7 @@ const Products = () => {
             }}
             >
             {
-            mockCategories.map( (category) => (
+            productCategories.map( (category) => (
                 <Category 
                 key={category}
                 active={category === activeCategory}
@@ -110,7 +61,7 @@ const Products = () => {
             }}
             >
             {
-            mockProducts.map( ({title, price, image}) => (
+            products.slice(0,8).map( ({title, price, image}) => (
                 <Product
                 key={uuid()}
                 title={title}
@@ -126,6 +77,7 @@ const Products = () => {
             sx={{
                 alignSelf: 'center'
             }}
+            onClick={ () => router.push('/products') }
             />
         </Stack>
     )
@@ -135,7 +87,7 @@ export default Products
 
 
 
-const Product = ({title, price, image}) => {
+export const Product = ({title, price, image}) => {
 
 
     return (
