@@ -40,6 +40,25 @@ class CustomDocument extends Document {
         <body>
         <Main />
         <NextScript />
+
+
+        {/* Tawk.to */}
+        <script
+        type='text/javascript'
+            dangerouslySetInnerHTML={{
+              __html: `
+              <div id='tawk_655438e5958be55aeaafb468'></div>
+              var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); Tawk_API.embedded='tawk_655438e5958be55aeaafb468';
+              (function(){
+              var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+              s1.async=true;
+              s1.src='https://embed.tawk.to/655438e5958be55aeaafb468/1hf8h6r65';
+              s1.charset='UTF-8';
+              s1.setAttribute('crossorigin','*');
+              s0.parentNode.insertBefore(s1,s0);})();
+              `,
+            }}
+          />
         </body>
       </Html>
     );
