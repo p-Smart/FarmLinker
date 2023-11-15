@@ -14,7 +14,7 @@ const Products = () => {
     const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
     const router = useRouter()
 
-    const [activeCategory, setActiveCategory] = useState('Vegetables')
+    const [activeCategory, setActiveCategory] = useState('Fruits')
 
 
     return (
@@ -61,7 +61,7 @@ const Products = () => {
             }}
             >
             {
-            products.slice(0,8).map( ({title, price, image}) => (
+            products.filter(product => product.category === activeCategory).map(({title, price, image}) => (
                 <Product
                 key={uuid()}
                 title={title}
