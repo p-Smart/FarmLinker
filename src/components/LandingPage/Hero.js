@@ -63,7 +63,7 @@ const Hero = () => {
             }}
             >
             <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.
+            Market your farm products and gain access to veterans in the farming industry for consultations
             </Typography>
             <Divider 
             sx={{
