@@ -1,9 +1,11 @@
 import { Divider, Stack, Typography } from "@mui/material"
+import { useRouter } from "next/router"
 import { AiOutlineMail } from "react-icons/ai"
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6"
 import  {FiPhoneCall} from 'react-icons/fi'
 import { SlLocationPin } from "react-icons/sl"
+import { neutral } from "src/theme/create-palette"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import uuid from "src/utils/uuid"
 
@@ -12,29 +14,31 @@ const contactLinks = [{Icon: SlLocationPin, title: 'Computer Science, University
 
 const Footer = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
+    const router = useRouter()
+    const landingPage = router.pathname==='/'
 
     return (
         <Stack
         component='footer'
         sx={{
-            bgcolor: '#071c21',
+            bgcolor: landingPage ? '#071c21' : 'secondary.main',
             pt: sm ? '50px' : '100px',
-            '& p': {color: 'neutral.50'},
-            color: 'neutral.50'
         }}
         >
         <Stack
         sx={{
             px: sm ? '20px' : '50px',
             pb: '30px',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            '& p': {color: landingPage ? 'neutral.50' : 'neutral.800'},
+            color: landingPage ? 'neutral.50' : 'neutral.800'
         }}
         >
         <Stack
         sx={{gap: '20px', width: md ? '100%' : lg ? '40%' :  xl ? '30%' : '25%'}}
         >
         <img 
-        src="/assets/images/farmlinker-bg-white.png"
+        src={landingPage ? '/assets/images/farmlinker-bg-white.png' : '/assets/images/FarmLinker-wo-bg.png'}
         style={{
             width: sm ? 633/4 : 633 / 3.7,
             height: sm ? 394/4 : 394 / 3.7,
@@ -51,7 +55,7 @@ const Footer = () => {
         contactLinks.map( ({title, Icon}) => (
             <Stack key={uuid()} 
             direction='row'
-            sx={{gap: '10px'}}
+            sx={{gap: '10px', alignItems: 'center'}}
             >
             <Icon />
             <Typography>{title}</Typography>
@@ -84,6 +88,8 @@ const Footer = () => {
             justifyContent: 'space-between',
             alignItems: 'center',
             p: '30px 50px',
+            bgcolor: '#071c21',
+            color: 'neutral.50',
             ...md && {gap: '20px'}
         }}
         >

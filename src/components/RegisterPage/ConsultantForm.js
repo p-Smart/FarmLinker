@@ -1,4 +1,4 @@
-import { MenuItem, Select, Slide, Stack, TextField } from "@mui/material"
+import { Box, MenuItem, Select, Slide, Stack, TextField, Typography } from "@mui/material"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import Button from "../Button"
 import { useState } from "react"
@@ -84,11 +84,13 @@ const ConsultantForm = () => {
                 onChange={(e) => onChange && onChange(e.target.value)}
                 required
                 /> :
+                <Box sx={{width: '100%'}}>
+                <Typography sx={{fontWeight: 300, color: 'neutral.600'}}>{label}</Typography>
                 <Select
                 label={label}
                 required
                 onChange={(e) => onChange && onChange(e.target.value)}
-                sx={{width: '100%'}}
+                sx={{width: '100%', mt: '5px'}}
                 >
                 {
                     select.map( ({label, id}) => (
@@ -100,7 +102,8 @@ const ConsultantForm = () => {
                         </MenuItem>
                     ) )
                 }
-            </Select>
+                </Select>
+                </Box>
                 }
                 </>
             ) )

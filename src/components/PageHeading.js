@@ -38,14 +38,16 @@ const PageHeading = ({title, topTitle}) => {
             ...sm && {gap: '20px'}
         }}
         >
-        <Stack sx={{gap: '20px'}}>
+        <Stack sx={{gap: '20px', ...sm && {alignItems: 'center'}}}>
         <Typography sx={{fontWeight: 600, color: 'primary.main'}}>
             {topTitle?.toUpperCase() || `WELCOME TO OUR STORE`}
         </Typography>
         <Typography 
         variant={sm ? 'h4' : md ? 'h3' : "h2"}
         sx={{color: 'neutral.50'}}
-        >{title}</Typography>
+        >
+        {title}
+        </Typography>
         </Stack>
 
         <Stack

@@ -5,12 +5,15 @@ import Button from "../Button"
 import { useState } from "react"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import { productCategories, products } from "src/mock-data/products"
+import { useRouter } from "next/router"
 
 
 
 const Products = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
+    const router = useRouter()
+
     const [activeCategory, setActiveCategory] = useState('Vegetables')
 
 
@@ -74,6 +77,7 @@ const Products = () => {
             sx={{
                 alignSelf: 'center'
             }}
+            onClick={ () => router.push('/products') }
             />
         </Stack>
     )
