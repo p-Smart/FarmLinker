@@ -108,11 +108,11 @@ const AboutUs = () => {
             }}
             />
             <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+            Explore our reliable marketplace, connecting farmers and buyers. Quality farm products, transparency, and a thriving community.
             </Typography>
             </Stack>
             <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipis icing elit, sed do eius mod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad min im veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequ at.
+            Discover our trusted marketplace for premium farm products. Elevate your agricultural experience with quality, reliability, and a thriving community of farmers and buyers.
             </Typography>
         </Stack>
         </Stack>

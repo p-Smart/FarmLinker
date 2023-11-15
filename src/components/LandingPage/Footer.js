@@ -46,7 +46,7 @@ const Footer = () => {
         }}
         />
         <Typography>
-        Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.
+        Market your farm products and gain access to veterans in the farming industry.
         </Typography>
         <Stack
         sx={{gap: '10px'}}
