@@ -1,12 +1,14 @@
 import { Divider, Stack, Typography } from "@mui/material"
 import Button from "../Button"
 import { useBreakpoints } from "src/theme/mediaQuery"
+import { useRouter } from "next/router"
 
 
 
 const Hero = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
+    const router = useRouter()
 
 
     return (
@@ -84,6 +86,7 @@ const Hero = () => {
             >
             <Button 
             title="Explore Products"
+            onClick={() => router.push('/products')}
             />
             <Button 
             title="Learn More"
