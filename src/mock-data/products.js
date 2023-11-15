@@ -1,6 +1,12 @@
 
 
 export const productCategories = ['Fruits', 'Vegetables', 'Food & Drinks', 'Dried Foods']
+// [
+//     { label: 'Fruits', id: 'fruits' },
+//     { label: 'Vegetables', id: 'vegetables' },
+//     { label: 'Food & Drinks', id: 'foodNdrinks' },
+//     { label: 'Dried Foods', id: 'dried_foods' },
+// ]
 
 
 export const products = [

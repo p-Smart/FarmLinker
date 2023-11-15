@@ -1,6 +1,7 @@
 import { Stack, Typography } from "@mui/material"
 import { useState } from "react"
 import AddProduct from "src/components/AccountPage/AddProduct"
+import ConsultationRequest from "src/components/AccountPage/ConsultationRequest"
 import Stats from "src/components/AccountPage/Stats"
 import Tools from "src/components/AccountPage/Tools"
 import PageHeading from "src/components/PageHeading"
@@ -14,13 +15,15 @@ const AccountPage = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
     const [openAddProduct, setOpenAddProduct] = useState(false)
+    const [openConsultationRequest, setOpenConsultationRequest] = useState(false)
+
 
 
     return (
         <AccountContext.Provider
         value={{
-            openAddProduct,
-            setOpenAddProduct
+            openAddProduct, setOpenAddProduct,
+            openConsultationRequest, setOpenConsultationRequest
         }}
         >
         <LandingPageLayout>
@@ -46,6 +49,7 @@ const AccountPage = () => {
         <Stats />
 
         <Tools />
+        <ConsultationRequest />
         </Stack>
 
 

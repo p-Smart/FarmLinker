@@ -6,64 +6,50 @@ import { AiOutlineFileAdd } from "react-icons/ai"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import { useState } from "react"
 import { productCategories } from "src/mock-data/products"
-import { DropzoneArea } from "react-mui-dropzone"
+import { specializations } from "../RegisterPage/register-data"
 
 
 
-const AddProduct = () => {
+const ConsultationRequest = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
 
 
-    const {openAddProduct, setOpenAddProduct} = useAccountContext()
-    const initialProductData = {
-        productName: '',
+    const {openConsultationRequest, setOpenConsultationRequest} = useAccountContext()
+    const initialConsultReqData = {
+        title: '',
         description: '',
-        category: '',
-        price: '',
-        availQuantity: '',
-        images: []
+        specialization: '',
     }
-    const [productData, setProductData] = useState(initialProductData)
+    const [consultReqData, setConsultReqData] = useState(initialConsultReqData)
 
 
     const form = [
         {
-            label: 'Product Name',
-            onChange: (e) => setProductData( (prevValue) => ({...prevValue, productName: e.target.value}) ),
+            label: 'Title',
+            onChange: (e) => setConsultReqData( (prevValue) => ({...prevValue, title: e.target.value}) ),
         },
         {
-            label: 'Description',
-            onChange: (e) => setProductData( (prevValue) => ({...prevValue, description: e.target.value}) ),
+            label: 'Brief Description',
+            onChange: (e) => setConsultReqData( (prevValue) => ({...prevValue, description: e.target.value}) ),
             multiline: {rows: 3}
         },
         {
-            label: 'Category',
-            onChange: (e) => setProductData( (prevValue) => ({...prevValue, category: e.target.value}) ),
-            select: productCategories
+            label: 'Specialization Field',
+            onChange: (e) => setConsultReqData( (prevValue) => ({...prevValue, specialization: e.target.value}) ),
+            select: specializations
         },
-        {
-            label: 'Price (N)',
-            onChange: (e) => setProductData( (prevValue) => ({...prevValue, price: e.target.value}) ),
-            type: 'number'
-        },
-        {
-            label: 'Available Qualtity',
-            type: 'number',
-            onChange: (e) => setProductData( (prevValue) => ({...prevValue, availQuantity: e.target.value}) ),
-        },
-        
     ]
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(productData)
+        console.log(consultReqData)
     }
 
 
     return (
         <Dialog
-        open={openAddProduct}
-        onClose={() => setOpenAddProduct(false)}
+        open={openConsultationRequest}
+        onClose={() => setOpenConsultationRequest(false)}
         sx={{
             '& .MuiPaper-root': {
                 width: sm ? '100%' : md ? '75%' : lg ? '60%' : xl ? '45%' : '40%'
@@ -81,9 +67,9 @@ const AddProduct = () => {
             }}
             variant="h5"
             >
-            Add New Product
+            Request Consultation
             <IoClose size={30} 
-            onClick={() => setOpenAddProduct(false)} 
+            onClick={() => setOpenConsultationRequest(false)} 
             style={{cursor: 'pointer'}} />
             </DialogTitle>
             <DialogContent sx={{display: 'flex', flexDirection: 'column', gap: '30px'}}>
@@ -96,6 +82,12 @@ const AddProduct = () => {
             <Typography>{errorMessage}</Typography>
             </Alert>
             } */}
+
+            <Typography
+            sx={{alignSelf: 'center'}}
+            >
+                Request consultation from our skilled experts in diverse fields.
+            </Typography>
             
             <Stack sx={{gap: '10px', mt: '10px'}}>
             {
@@ -124,12 +116,12 @@ const AddProduct = () => {
                 sx={{width: '100%', mt: '5px'}}
                 >
                 {
-                    select.map( (category) => (
+                    select.map( ({label, id}) => (
                         <MenuItem
-                        key={category}
-                        value={category}
+                        key={id}
+                        value={id}
                         >
-                        {category}
+                        {label}
                         </MenuItem>
                     ) )
                 }
@@ -139,30 +131,11 @@ const AddProduct = () => {
                 </>
             ) )
             }
-
-            <Stack
-            sx={{
-                '& .MuiDropzoneArea-textContainer p': {
-                    fontSize: '1.2rem'
-                }
-            }}
-            >
-            <Typography sx={{fontWeight: 300, color: 'neutral.600'}}>
-                Product Image
-            </Typography>
-            <DropzoneArea
-            acceptedFiles={['image/*']}
-            dropzoneText={"Drag and drop image here or click"}
-            onChange={(files) => setProductData( (prevValue) => ({...prevValue, images: files}) )}
-            filesLimit={6}
-            getFileLimitExceedMessage={(limit) => `Maximum number of images exceeded (${limit})`}
-            />
-            </Stack>
             </Stack>
             </DialogContent>
             <DialogActions>
             <Button
-            title='Submit Product'
+            title='Submit'
             Icon={AiOutlineFileAdd}
             IconPlacement="left"
             squareCorners
@@ -176,4 +149,4 @@ const AddProduct = () => {
     )
 }
 
-export default AddProduct
+export default ConsultationRequest

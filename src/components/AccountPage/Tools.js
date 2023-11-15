@@ -10,7 +10,7 @@ import { useAccountContext } from "src/contexts/accountContext"
 const Tools = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
 
-    const {openAddProduct, setOpenAddProduct} = useAccountContext()
+    const {setOpenAddProduct, setOpenConsultationRequest} = useAccountContext()
 
 
     const tools = [
@@ -32,7 +32,7 @@ const Tools = () => {
         {
             title: 'Consultation Request',
             Icon: 'https://img.icons8.com/color/48/consultation.png',
-            action: null
+            action: () => setOpenConsultationRequest(true)
         },
     ]
 
