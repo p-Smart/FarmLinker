@@ -2,8 +2,8 @@ import { Box, Button, Button as MUIButton, Stack, TextField, Typography } from "
 import { useState } from "react"
 import CheckBox from "src/components/CheckBox"
 import Grid from "src/components/CustomGrid"
-import { Product } from "src/components/LandingPage/Products"
 import PageHeading from "src/components/PageHeading"
+import Product from "src/components/Product"
 import FilterCard from "src/components/ProductsPage/FilterCard"
 import Filters from "src/components/ProductsPage/Filters"
 import LandingPageLayout from "src/components/layouts/LandingPageLayout"
@@ -49,7 +49,6 @@ const ProductsPage = () => {
                     gap: '30px'
                 }}
                 gridWrapSx={{
-                    justifyContent: 'space-between',
                     gap: '20px'
                 }}
                 >

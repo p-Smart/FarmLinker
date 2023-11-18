@@ -7,11 +7,14 @@ import { useBreakpoints } from "src/theme/mediaQuery"
 import { useState } from "react"
 import { productCategories } from "src/mock-data/products"
 import { specializations } from "../RegisterPage/register-data"
+import toast from 'react-hot-toast'
+import { fetchData } from "src/utils/fetchData"
 
 
 
 const ConsultationRequest = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
+    const [loading, setLoading] = useState(false)
 
 
     const {openConsultationRequest, setOpenConsultationRequest} = useAccountContext()
@@ -40,16 +43,28 @@ const ConsultationRequest = () => {
         },
     ]
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(consultReqData)
+        try{
+            const {message, data} = await fetchData({
+                endpoint: '/request-consultancy',
+                payload: consultReqData
+            })
+            toast.success(message, {duration: 5000})
+        }
+        catch(err){
+            toast.error(err.message)
+        }
+        finally{
+            setLoading(false)
+        }
     }
 
 
     return (
         <Dialog
         open={openConsultationRequest}
-        onClose={() => setOpenConsultationRequest(false)}
+        // onClose={() => setOpenConsultationRequest(false)}
         sx={{
             '& .MuiPaper-root': {
                 width: sm ? '100%' : md ? '75%' : lg ? '60%' : xl ? '45%' : '40%'
@@ -73,16 +88,6 @@ const ConsultationRequest = () => {
             style={{cursor: 'pointer'}} />
             </DialogTitle>
             <DialogContent sx={{display: 'flex', flexDirection: 'column', gap: '30px'}}>
-
-            {/* {
-            errorMessage &&
-            <Alert
-            severity="error"
-            >
-            <Typography>{errorMessage}</Typography>
-            </Alert>
-            } */}
-
             <Typography
             sx={{alignSelf: 'center'}}
             >
@@ -142,6 +147,7 @@ const ConsultationRequest = () => {
             fullWidth
             sx={{gap: '5px'}}
             type='submit'
+            loading={loading}
             />
             </DialogActions>
             </form>

@@ -7,6 +7,8 @@ import { useBreakpoints } from "src/theme/mediaQuery"
 import { useState } from "react"
 import { productCategories } from "src/mock-data/products"
 import { DropzoneArea } from "react-mui-dropzone"
+import { fetchData, getUserId } from "src/utils/fetchData"
+import toast from 'react-hot-toast'
 
 
 
@@ -15,13 +17,14 @@ const AddProduct = () => {
 
 
     const {openAddProduct, setOpenAddProduct} = useAccountContext()
+    const [loading, setLoading] = useState(false)
     const initialProductData = {
         productName: '',
         description: '',
         category: '',
         price: '',
         availQuantity: '',
-        images: []
+        images: [],
     }
     const [productData, setProductData] = useState(initialProductData)
 
@@ -54,16 +57,34 @@ const AddProduct = () => {
         
     ]
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(productData)
+        setLoading(true)
+        try{
+            const {message} = await fetchData({
+                endpoint: '/add-product',
+                useFormData: true,
+                payload: {
+                    ...productData
+                },
+            })
+            
+            toast.success(message)
+            // setOpenAddProduct(false)
+        }
+        catch(err){
+            toast.error(err.message)
+        }
+        finally{
+            setLoading(false)
+        }
     }
 
 
     return (
         <Dialog
         open={openAddProduct}
-        onClose={() => setOpenAddProduct(false)}
+        // onClose={() => setOpenAddProduct(false)}
         sx={{
             '& .MuiPaper-root': {
                 width: sm ? '100%' : md ? '75%' : lg ? '60%' : xl ? '45%' : '40%'
@@ -87,16 +108,6 @@ const AddProduct = () => {
             style={{cursor: 'pointer'}} />
             </DialogTitle>
             <DialogContent sx={{display: 'flex', flexDirection: 'column', gap: '30px'}}>
-
-            {/* {
-            errorMessage &&
-            <Alert
-            severity="error"
-            >
-            <Typography>{errorMessage}</Typography>
-            </Alert>
-            } */}
-            
             <Stack sx={{gap: '10px', mt: '10px'}}>
             {
             form.map ( ({label, onChange, type, select, multiline}) => (
@@ -154,7 +165,7 @@ const AddProduct = () => {
             acceptedFiles={['image/*']}
             dropzoneText={"Drag and drop image here or click"}
             onChange={(files) => setProductData( (prevValue) => ({...prevValue, images: files}) )}
-            filesLimit={6}
+            filesLimit={3}
             getFileLimitExceedMessage={(limit) => `Maximum number of images exceeded (${limit})`}
             />
             </Stack>
@@ -169,6 +180,7 @@ const AddProduct = () => {
             fullWidth
             sx={{gap: '5px'}}
             type='submit'
+            loading={loading}
             />
             </DialogActions>
             </form>

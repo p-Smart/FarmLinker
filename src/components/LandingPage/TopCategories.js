@@ -107,8 +107,8 @@ const TopCategories = () => {
         <Swiper
         spaceBetween={sm ? 10 : md ? 20 : 30}
         slidesPerView={sm ? 2 : md ? 3 : 4}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => null}
+        onSwiper={(swiper) => null}
         style={{width: '100%'}}
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         loop

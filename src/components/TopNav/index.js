@@ -150,11 +150,13 @@ const TopNav = () => {
                             boxShadow: '0 0 10px rgb(0,0,0.125)',
                             bgcolor: 'neutral.50',
                             gap: '20px',
-                            p: '30px 30px',
+                            p: '30px 25px',
                             textTransform: 'capitalize',
                             alignItems: 'flex-start',
                             justifyContent: 'flex-start'
                         }}
+                        tabIndex={1}
+                        onBlur={() => console.log('Outside Click')}
                         >
                         {
                         accountOptions.map( ({title, route}) => (
@@ -164,7 +166,11 @@ const TopNav = () => {
                             variant="text"
                             onClick={() => router.push(route)}
                             component='span'
-                            sx={{p: 0, alignSelf: 'flex-start'}}
+                            sx={{
+                                p: 0,
+                                minWidth: 'unset',
+                                alignSelf: 'flex-start'
+                            }}
                             />
                         ) )
                         }

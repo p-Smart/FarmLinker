@@ -3,16 +3,22 @@ import { useBreakpoints } from "src/theme/mediaQuery"
 import Button from "../Button"
 import { useState } from "react"
 import { useRegisterFormContext } from "src/contexts/registerFormContext"
+import toast from 'react-hot-toast'
+import { fetchData } from "src/utils/fetchData"
+import { useRouter } from "next/router"
 
 
 
 const FarmerForm = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const {activeTab} = useRegisterFormContext()
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
     const initialRegData = {
         fullname: '',
         email: '',
         tel: '',
+        address: '',
         farm_location: '',
         farming_ex: '',
         pass: ''
@@ -27,11 +33,17 @@ const FarmerForm = () => {
         },
         {
             label: 'Email address',
-            onChange: (val) => setRegData( (prevVal) => ({...prevVal, email: val}) )
+            onChange: (val) => setRegData( (prevVal) => ({...prevVal, email: val}) ),
+            type: 'email'
         },
         {
             label: 'Phone Number',
-            onChange: (val) => setRegData( (prevVal) => ({...prevVal, tel: val}) )
+            onChange: (val) => setRegData( (prevVal) => ({...prevVal, tel: val}) ),
+            type: 'number'
+        },
+        {
+            label: 'Residential Address',
+            onChange: (val) => setRegData( (prevVal) => ({...prevVal, address: val}) )
         },
         {
             label: 'Farm Location',
@@ -39,14 +51,41 @@ const FarmerForm = () => {
         },
         {
             label: 'Years of Farming Experience',
-            onChange: (val) => setRegData( (prevVal) => ({...prevVal, farming_ex: val}) )
+            onChange: (val) => setRegData( (prevVal) => ({...prevVal, farming_ex: val}) ),
+            type: 'number'
         },
         {
             label: 'Password',
-            onChange: (val) => setRegData( (prevVal) => ({...prevVal, pass: val}) )
+            onChange: (val) => setRegData( (prevVal) => ({...prevVal, pass: val}) ),
+            type: 'password'
         },
         
     ]
+
+
+    const handleRegister = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+        try{
+            const {message} = await fetchData({
+                endpoint: '/register',
+                payload: {
+                    ...regData,
+                    userType: 'farmer'
+                }
+            })
+            
+            toast.success(message)
+            router.push('/login')
+        }
+        catch(err){
+            toast.error(err.message)
+        }
+        finally{
+            setLoading(false)
+        }
+    }
+
 
     return (
         <Slide
@@ -56,6 +95,8 @@ const FarmerForm = () => {
         in={activeTab}
         >
         <Stack
+        onSubmit={handleRegister}
+        component='form'
         sx={{
             width: sm ? '100%' : md ? '80%' : '50%',
             alignItems: 'center',
@@ -66,12 +107,12 @@ const FarmerForm = () => {
         }}
         >
             {
-            form.map ( ({label, onChange}) => (
+            form.map ( ({label, onChange, type}) => (
                 <TextField
                 key={label}
                 label={label}
                 onChange={(e) => onChange && onChange(e.target.value)}
-                type={label==='Password' ? "password" : 'text'}
+                type={type || 'text'}
                 />
             ) )
             }
@@ -79,7 +120,8 @@ const FarmerForm = () => {
             <Button 
             title="Create Farmer Account"
             sx={{alignSelf: 'flex-start'}}
-            onClick={() => console.log(regData)}
+            loading={loading}
+            type='submit'
             />
         </Stack>
         </Slide>

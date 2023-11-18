@@ -4,12 +4,16 @@ import Button from "../Button"
 import { useState } from "react"
 import { useRegisterFormContext } from "src/contexts/registerFormContext"
 import { specializations } from "./register-data"
-
+import { useRouter } from "next/router"
+import toast from 'react-hot-toast'
+import { fetchData } from "src/utils/fetchData"
 
 
 const ConsultantForm = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const {activeTab} = useRegisterFormContext()
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
     const initialRegData = {
         fullname: '',
         email: '',
@@ -49,8 +53,27 @@ const ConsultantForm = () => {
         
     ]
 
-    const handleSubmit = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault()
+        setLoading(true)
+        try{
+            const {message} = await fetchData({
+                endpoint: '/register',
+                payload: {
+                    ...regData,
+                    userType: 'consultant'
+                }
+            })
+            
+            toast.success(message)
+            router.push('/login')
+        }
+        catch(err){
+            toast.error(err.message)
+        }
+        finally{
+            setLoading(false)
+        }
     }
 
     return (
@@ -61,8 +84,8 @@ const ConsultantForm = () => {
         in={activeTab}
         >
         <Stack
+        onSubmit={handleRegister}
         component='form'
-        onSubmit={handleSubmit}
         sx={{
             width: sm ? '100%' : md ? '80%' : '50%',
             alignItems: 'center',
@@ -111,8 +134,9 @@ const ConsultantForm = () => {
 
             <Button 
             title="Create Consultant Account"
-            type='submit'
             sx={{alignSelf: 'flex-start'}}
+            loading={loading}
+            type='submit'
             />
         </Stack>
         </Slide>

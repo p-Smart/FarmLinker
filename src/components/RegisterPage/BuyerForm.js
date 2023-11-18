@@ -3,15 +3,21 @@ import { useBreakpoints } from "src/theme/mediaQuery"
 import Button from "../Button"
 import { useState } from "react"
 import { useRegisterFormContext } from "src/contexts/registerFormContext"
+import toast from 'react-hot-toast'
+import { fetchData } from "src/utils/fetchData"
+import { useRouter } from "next/router"
 
 
 
 const BuyerForm = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const {activeTab} = useRegisterFormContext()
+    const [loading, setLoading] = useState(false)
+    const router = useRouter()
     const initialRegData = {
         fullname: '',
         email: '',
+        tel: '',
         address: '',
         delivery_address: '',
         pass: ''
@@ -26,7 +32,13 @@ const BuyerForm = () => {
         },
         {
             label: 'Email address',
-            onChange: (val) => setRegData( (prevVal) => ({...prevVal, email: val}) )
+            onChange: (val) => setRegData( (prevVal) => ({...prevVal, email: val}) ),
+            type: 'email'
+        },
+        {
+            label: 'Mobile Number',
+            onChange: (val) => setRegData( (prevVal) => ({...prevVal, tel: val}) ),
+            type: 'number'
         },
         {
             label: 'Home Address',
@@ -38,10 +50,35 @@ const BuyerForm = () => {
         },
         {
             label: 'Password',
-            onChange: (val) => setRegData( (prevVal) => ({...prevVal, pass: val}) )
+            onChange: (val) => setRegData( (prevVal) => ({...prevVal, pass: val}) ),
+            type: 'password'
         },
         
     ]
+
+
+    const handleRegister = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+        try{
+            const {message} = await fetchData({
+                endpoint: '/register',
+                payload: {
+                    ...regData,
+                    userType: 'buyer'
+                }
+            })
+            
+            toast.success(message)
+            router.push('/login')
+        }
+        catch(err){
+            toast.error(err.message)
+        }
+        finally{
+            setLoading(false)
+        }
+    }
 
     return (
         <Slide
@@ -51,6 +88,8 @@ const BuyerForm = () => {
         in={activeTab}
         >
         <Stack
+        onSubmit={handleRegister}
+        component='form'
         sx={{
             width: sm ? '100%' : md ? '80%' : '50%',
             alignItems: 'center',
@@ -61,12 +100,13 @@ const BuyerForm = () => {
         }}
         >
             {
-            form.map ( ({label, onChange}) => (
+            form.map ( ({label, onChange, type}) => (
                 <TextField
                 key={label}
                 label={label}
                 onChange={(e) => onChange && onChange(e.target.value)}
-                type={label==='Password' ? "password" : 'text'}
+                type={type || 'text'}
+                disabled={loading}
                 />
             ) )
             }
@@ -74,7 +114,8 @@ const BuyerForm = () => {
             <Button 
             title="Create Buyer Account"
             sx={{alignSelf: 'flex-start'}}
-            onClick={() => console.log(regData)}
+            loading={loading}
+            type='submit'
             />
         </Stack>
         </Slide>

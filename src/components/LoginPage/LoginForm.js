@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import { useRouter } from "next/router"
 import Button from "../Button"
+import toast from 'react-hot-toast'
+import { fetchData } from "src/utils/fetchData"
 
 
 
@@ -10,7 +12,9 @@ const LoginForm = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
 
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
+
     const initialLoginData = {
         email: '',
         pass: ''
@@ -32,15 +36,31 @@ const LoginForm = () => {
         
     ]
 
-    const handleSubmit = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
+        setLoading(true)
+        try{
+            const {message, data} = await fetchData({
+                endpoint: '/login',
+                payload: loginData
+            })
+            localStorage.setItem('userData', JSON.stringify(data))
+            toast.success(message)
+            router.push('/account')
+        }
+        catch(err){
+            toast.error(err.message)
+        }
+        finally{
+            setLoading(false)
+        }
     }
 
-    
+
 
     return (
         <form
-        onSubmit={handleSubmit}
+        onSubmit={handleLogin}
         style={{
             display: 'flex',
             flexDirection: 'column',
@@ -82,9 +102,9 @@ const LoginForm = () => {
 
             <Button 
             title="Sign In"
-            type='submit'
             sx={{alignSelf: 'flex-start'}}
-            onClick={() => console.log(loginData)}
+            loading={loading}
+            type='submit'
             />
         </Stack>
 

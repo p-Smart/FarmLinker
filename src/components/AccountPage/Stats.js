@@ -5,6 +5,7 @@ import { MdDeliveryDining, MdEventAvailable, MdProductionQuantityLimits, MdRevie
 import { FaMoneyCheckAlt } from "react-icons/fa"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import uuid from "src/utils/uuid"
+import { useEffect, useRef } from "react"
 
 
 
@@ -51,10 +52,19 @@ const stats = [
 
 const Stats = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
+    const statsRef = useRef(null)
+
+    useEffect( () => {
+        if(statsRef.current){
+            statsRef.current.scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [] )
 
 
     return (
-        <Stack sx={{gap: '20px'}}>
+        <Stack 
+        ref={statsRef}
+        sx={{gap: '20px'}}>
         <Typography
         variant={sm ? 'h5' : lg ? "h4" : "h3"}
         >

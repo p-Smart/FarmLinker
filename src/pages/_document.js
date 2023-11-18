@@ -43,7 +43,7 @@ class CustomDocument extends Document {
 
 
         {/* Tawk.to */}
-        <script
+        {/* <script
         type='text/javascript'
             dangerouslySetInnerHTML={{
               __html: `
@@ -58,7 +58,7 @@ class CustomDocument extends Document {
               s0.parentNode.insertBefore(s1,s0);})();
               `,
             }}
-          />
+          /> */}
         </body>
       </Html>
     );

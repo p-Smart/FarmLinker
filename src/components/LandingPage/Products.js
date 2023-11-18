@@ -6,6 +6,7 @@ import { useState } from "react"
 import { useBreakpoints } from "src/theme/mediaQuery"
 import { productCategories, products } from "src/mock-data/products"
 import { useRouter } from "next/router"
+import Product from "../Product"
 
 
 
@@ -56,7 +57,7 @@ const Products = () => {
                 gap: '30px'
             }}
             gridWrapSx={{
-                justifyContent: 'space-between',
+                // justifyContent: 'space-between',
                 gap: '20px'
             }}
             >
@@ -87,58 +88,7 @@ export default Products
 
 
 
-export const Product = ({title, price, image}) => {
 
-
-    return (
-        <MUIButton
-        sx={{
-            minWidth: 'unset',
-            p: 'unset',
-            height: '400px',
-            display: 'block',
-            textTransform: 'unset',
-            boxShadow: '0 0 10px rgb(0,0,0,.125)'
-        }}
-        >
-        <Stack
-        sx={{
-            width: '100%',
-            height: '70%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            bgcolor: '#f9f9f9'
-        }}
-        >
-        <img 
-        src={image}
-        style={{
-            objectFit: 'cover',
-            width: '100%',
-            height: '100%'
-        }}
-        />
-        </Stack>
-        <Stack
-        sx={{
-            bgcolor: '#fff',
-            height: '30%',
-            alignItems: 'center',
-            justifyContent: "center",
-            gap: '15px'
-        }}
-        >
-            <Typography sx={{fontWeight: 600, color: 'neutral.800'}}>{title}</Typography>
-            <Typography
-            variant="h6"
-            sx={{color: 'primary.main'}}
-            >
-            ₦{price}
-            </Typography>
-        </Stack>
-        </MUIButton>
-    )
-}
 
 const Category = ({title, active=false, onClick}) => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
