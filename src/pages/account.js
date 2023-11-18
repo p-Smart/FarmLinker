@@ -15,8 +15,8 @@ import { useBreakpoints } from "src/theme/mediaQuery"
 const AccountPage = () => {
     const {xs, sm, md, lg, xl} = useBreakpoints()
     const paddingX = sm ? '20px' : md ? '50px' : xl || lg ? '100px' : '150px'
-    const [openAddProduct, setOpenAddProduct] = useState(false)
-    const [openConsultationRequest, setOpenConsultationRequest] = useState(true)
+    const [openAddProduct, setOpenAddProduct] = useState(true)
+    const [openConsultationRequest, setOpenConsultationRequest] = useState(false)
 
 
     const {tawkMessenger} = useGlobalContext()
